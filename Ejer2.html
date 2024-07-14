@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&family=Varela+Round&display=swap" rel="stylesheet">
+    <title>Calculadora de Letra del DNI</title>
+    <style>
+        body {
+            background: linear-gradient(#1F2937, #000814);
+            font-family: "Varela Round", sans-serif;
+        }
+        .carta {
+            backdrop-filter: blur(10px);
+        }
+        .rounded {
+            border-radius: 20px;
+        }
+    </style>
+</head>
+<body class="text-white flex flex-col items-center justify-center min-h-screen">
+
+    <header class="mb-6">
+        <h1 class="text-3xl font-bold text-center">Calculadora de Letra del DNI</h1>
+    </header>
+
+    <div class="carta bg-gray-800 p-6 rounded shadow-md">
+        <div class="mb-4">
+            <label class="block mb-2">Ingresa tu número de DNI entre 0-99999999:</label>
+            <input type="number" id="dni" class="p-2 rounded bg-gray-700" />
+            <button onclick="calcularLetra()" class="mt-2 bg-blue-600 p-2 rounded">Calcular</button>
+        </div>
+        <div id="resultado" class="mt-4 text-gray-400"></div>
+    </div>
+
+    <script>
+        function calcularLetra() {
+            const dni = parseInt(document.getElementById('dni').value);
+            const letras = "TRWAGMYFPDXBNJZSQVHLCKE";
+
+            if (isNaN(dni) || dni < 0 || dni > 99999999) {
+                alert("Ingresa un número válido entre 0 y 99999999.");
+                return;
+            }
+
+            const resto = dni % 23;
+            const letra = letras[resto];
+
+            document.getElementById('resultado').innerText = `La letra correspondiente es: ${letra}`;
+        }
+    </script>
+
+</body>
+</html>

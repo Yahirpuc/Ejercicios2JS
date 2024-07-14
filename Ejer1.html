@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&family=Varela+Round&display=swap" rel="stylesheet">
+    <title>EjerJS</title>
+    <style>
+        body{
+            background: linear-gradient(#1F2937, #000814);
+            font-family: "Varela Round", sans-serif;
+        }
+        .rounded {
+            border-radius: 20px;
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-white flex flex-col items-center justify-center min-h-screen">
+
+    <header class="mb-6">
+        <h1 class="text-3xl font-bold text-center">Formulario</h1>
+    </header>
+
+    <div class="bg-gray-800 p-6 rounded shadow-md">
+        <!-- Seccion de verificacion de edad -->
+        <div class="mb-4">
+            <label class="block mb-2">Ingresa tu edad:</label>
+            <input type="number" id="edad" class="p-2 rounded bg-gray-700" />
+            <button onclick="verificarEdad()" class="mt-2 bg-blue-600 p-2 rounded">Verificar</button>
+        </div>
+
+        <!-- Seccion de nota -->
+        <div class="mb-4">
+            <label class="block mb-2">Ingresa una nota entre 0-10:</label>
+            <input type="number" id="nota" class="p-2 rounded bg-gray-700" />
+            <button onclick="evaluarNota()" class="mt-2 bg-blue-600 p-2 rounded">Comprobar</button>
+        </div>
+
+        <!-- Seccion de cadenas de texto -->
+        <div class="mb-4">
+            <button onclick="recopilarCadenas()" class="mt-2 bg-blue-600 p-2 rounded">Recopilar Cadenas</button>
+        </div>
+
+        <!-- Mostrar cadenas concatenadas -->
+        <div id="resultado" class="mt-4 text-gray-400"></div>
+    </div>
+
+    <script>
+        function verificarEdad() {
+            const edad = parseInt(document.getElementById('edad').value);
+            if (edad >= 18) {
+                alert("¡Ya puedes conducir!");
+            } else {
+                alert("Lo siento, aún no puedes conducir.");
+            }
+        }
+
+        function evaluarNota() {
+            const nota = parseFloat(document.getElementById('nota').value);
+            let calificacion;
+        
+            if (nota >= 9 && nota <= 10) {
+                calificacion = "Sobresaliente";
+            } else if (nota >= 7 && nota < 9) {
+                calificacion = "Notable";
+            } else if (nota >= 6 && nota < 7) {
+                calificacion = "Bien";
+            } else if (nota >= 5 && nota < 6) {
+                calificacion = "Suficiente";
+            } else if (nota >= 3 && nota < 5) {
+                calificacion = "Insuficiente";
+            } else if (nota >= 0 && nota < 3) {
+                calificacion = "Muy deficiente";
+            } else {
+                calificacion = "Nota no válida";
+            }
+        
+            alert("Tu calificación es: " + calificacion);
+        }
+        
+
+        function recopilarCadenas() {
+            let cadenas = [];
+            let input;
+
+            while (true) {
+                input = prompt("Ingresa una cadena de texto o presiona 'Cancelar' para salir:");
+                if (input === null) break; 
+                cadenas.push(input);
+            }
+
+          
+            const resultado = cadenas.map(cadena => cadena.split('').join('-')).join(' - ');
+
+         
+            if (resultado) {
+                document.getElementById('resultado').innerText = "Cadenas concatenadas: " + resultado;
+            } else {
+                document.getElementById('resultado').innerText = "No se ingresaron cadenas.";
+            }
+        }
+    </script>
+
+</body>
+</html>
